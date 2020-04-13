@@ -1,3 +1,5 @@
+// very lazy, terrible code ahead
+
 let editor;
 let currentName = 'default';
 let tabs = {};
@@ -140,7 +142,7 @@ function initProject(name) {
         modified: Date.now(),
         version: 1,
         meta: {},
-        assets: [{name: 'readme.txt', created: Date.now(), encoding: 'text', contents: 'Yayy! This timeline project was created '+moment().format('LLLL')+'\n'}],
+        assets: [{ name: 'readme.txt', created: Date.now(), encoding: 'text', contents: 'Yayy! This timeline project was created ' + moment().format('LLLL') + '\n' }],
         files: [{
             name: 'main.tl',
             created: Date.now(),
@@ -209,23 +211,6 @@ function initMonaco() {
             ]
         });
 
-        // Register a completion item provider for the new language
-        monaco.languages.registerCompletionItemProvider('timeline', {
-            provideCompletionItems: () => {
-                var suggestions = [{
-                    label: 'simpleText',
-                    kind: monaco.languages.CompletionItemKind.Text,
-                    insertText: 'simpleText'
-                }, {
-                    label: 'group',
-                    kind: monaco.languages.CompletionItemKind.Keyword,
-                    insertText: 'group ${1:group} {\n\t\n}',
-                    insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet
-                }];
-                return { suggestions: suggestions };
-            }
-        });
-
         console.log('Creating editor...');
         $('body').append('<div id="code"></div>');
         editor = monaco.editor.create(document.getElementById('code'), {
@@ -261,11 +246,11 @@ createTimelinePreview = function (viewonly, buildonly) {
     }
     libdata += '\n';
     if (buildonly) {
-        (async function() {
-        var blob = new Blob([`<!doctype html>
+        (async function () {
+            var blob = new Blob([`<!doctype html>
 <script>${await fetch('js/jquery.min.js').then(r => r.text())}</script>
 <script>${await fetch('js/timeline.js').then(r => r.text())}</script>
-<script>${await fetch('js/libs.combined.js?r='+Date.now()).then(r => r.text())}</script>
+<script>${await fetch('js/libs.combined.js?r=' + Date.now()).then(r => r.text())}</script>
 <textarea id="____timelinecompiledsource" style="display:none">
 ${header + libdata + code}
 </textarea>
@@ -292,16 +277,16 @@ a:hover {
 <script>
 (function() {new TimelineCompiler($('#____timelinecompiledsource').val()).execute()})();
 </script>`], {
-            type: "text/html"
-        });
-        if (window.lastCompiledURL) {
-            URL.revokeObjectURL(window.lastCompiledURL);
-        }
-        let url = URL.createObjectURL(blob);
-        window.lastCompiledURL = url;
-        let link = $('<a download="'+curProject.name+'_'+curProject.incr+'.html" href="'+url+'"></a>');
-        link[0].click();
-    })();
+                type: "text/html"
+            });
+            if (window.lastCompiledURL) {
+                URL.revokeObjectURL(window.lastCompiledURL);
+            }
+            let url = URL.createObjectURL(blob);
+            window.lastCompiledURL = url;
+            let link = $('<a download="' + curProject.name + '_' + curProject.incr + '.html" href="' + url + '"></a>');
+            link[0].click();
+        })();
         return;
     }
     if (viewonly) {
