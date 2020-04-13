@@ -335,7 +335,7 @@ a:hover {
     }
     let url = URL.createObjectURL(blob);
     window.lastCompiledURL = url;
-    $('body').append('<iframe id="framePreview" style="position:fixed;background:#111;left:0;top:0;bottom:0;right:0;border:none;width:100%;height:100%" scrolling="no" src="/playground.html#' + url + '"></iframe>');
+    $('body').append('<iframe id="framePreview" style="position:fixed;background:#111;left:0;top:0;bottom:0;right:0;border:none;width:100%;height:100%" scrolling="no" src="playground.html#' + url + '"></iframe>');
     $('#framePreview').focus();
 }
 onmessage = function (ev) {
