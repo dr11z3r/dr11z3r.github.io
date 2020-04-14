@@ -1,0 +1,65 @@
+<!doctype html>
+<title>Drizer's Memento</title>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.nanogallery2.min.js"></script>
+<script src="js/moment-with-locales.min.js"></script>
+<style>
+@import 'css/nanogallery2.min.css';
+html, body {
+    padding: 0;
+    margin: 0;
+    width:100%;
+    height: 100%;
+    background:#111;
+    color:#ddd;
+    font-family: Consolas, monospace;
+    font-size: 18px;
+}
+a {
+    color:#eee;
+    text-decoration: none;
+}
+a:hover {
+    color: #FFF;
+}
+</style>
+<div style="text-align: center">
+    <div id="gallery">Carregando...</div>
+</div>
+
+<script>
+moment.locale('pt-BR');
+fetch('prints/galeria.json?r='+Date.now()).then(r => {
+    r.json().then(galeria => {
+        let items = [];
+        let ngaleria = {};
+        for(let ok of Object.keys(galeria).sort((l,r) => galeria[l].ts-galeria[r].ts)) {
+            ngaleria[ok] = galeria[ok];
+        }
+        for (let imghash in ngaleria) {
+            let img = ngaleria[imghash];
+            let srct = img.thumb ? 'thumbs/'+imghash+'.jpg' : undefined;
+            items.push({
+                src: img.pfn.replace(/\\/g, '/'),
+                srct,
+                title: img.fn,
+                description:moment(img.ts).format('MMMM [de] YYYY')+' - '+moment(img.ts).fromNow(),
+            });
+        }
+        $("#gallery").nanogallery2({
+            thumbnailLabel: {
+                position: 'overImageOnBottom',
+                hideIcons: true,
+                titleFontSize: '0.8em',
+                titleMultiLine: true,
+            },
+            thumbnailHeight:  'auto',
+            thumbnailWidth:   440,
+            itemsBaseURL:     'prints/',
+            items,
+        });
+    });
+});
+</script>

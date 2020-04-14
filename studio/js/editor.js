@@ -1,4 +1,4 @@
-// very lazy, terrible code ahead
+// lazy, terrible code ahead
 
 let editor;
 let currentName = 'default';
