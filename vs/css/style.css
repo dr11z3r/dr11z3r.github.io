@@ -480,11 +480,13 @@ a:hover {
 }
 #dialog-title {
 	background:#222;
-	padding-left:3px;
-	font-size: 15px;
+	padding-left:10px;
+	font-size: 19px;
 	font-weight:bold;
 	color:#fff;
 	border-bottom:1px solid #333;
+	padding-top:4px;
+	padding-bottom:4px;
 }
 #dialog-body {
 	padding:10px;
