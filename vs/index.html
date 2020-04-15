@@ -1,0 +1,117 @@
+<!doctype html>
+
+<head>
+	<title>VS</title>
+	<style>
+		@import 'css/style.css';
+		@import 'css/jquery.qtip.css';
+		@import 'css/jstree.style.min.css';
+		@import 'css/toastr.min.css';
+	</style>
+</head>
+
+<body>
+	<div id="overlay">
+		<div id="overlay-msg">Loading...
+			<b class="overlay-small-text">Please wait...</b>
+		</div>
+	</div>
+	<div id="minimap">
+		<div id="minimap-self"></div>
+	</div>
+	<div id="project">
+		<div id="project-hierarchy">
+		</div>
+		<div id="project-node">
+		</div>
+	</div>
+	<div id="menu">
+		<div class="menu-item">
+			<a href="#">File</a>
+			<div class="menu-subitems">
+				<a href="#" data-action="new-view" class="hidden-proj">New View
+				</a>
+				<a href="#" data-action="new-source" class="hidden-proj">New Source
+				</a>
+				<a href="#" data-action="new-file" class="hidden-proj">New File
+				</a>
+				<a href="#" data-action="save-project" class="hidden-proj">Save Project
+					<span class="shortcut">Ctrl+S</span>
+				</a>
+				<a href="#" data-action="new-project">New Project
+				</a>
+				<a href="#" class="open-project" data-action="open-project">Open Project
+				</a>
+				<div class="menu-separator"></div>
+			</div>
+		</div>
+		<div class="menu-item hidden-proj">
+			<a href="#">Edit</a>
+			<div class="menu-subitems">
+				<a href="#" data-action="undo">
+					<span id="history-undo">Undo</span>
+					<span class="shortcut">Ctrl+Z</span>
+				</a>
+				<a href="#" data-action="redo">
+					<span id="history-redo">Redo</span>
+					<span class="shortcut">Ctrl+Y</span>
+				</a>
+				<div class="menu-separator"></div>
+			</div>
+		</div>
+		<div class="menu-item hidden-proj">
+			<a href="#">Nodes</a>
+			<div class="menu-subitems">
+				<a href="#" data-action="show-instantiator">
+					<span>New</span>
+					<span class="shortcut">Shift + Left Click</span>
+				</a>
+				<a href="#" data-action="view-nodes">
+					<span>View Nodes...</span>
+				</a>
+			</div>
+		</div>
+		<div class="menu-item hidden-proj">
+			<a href="#">Assets</a>
+			<div class="menu-subitems">
+				<a href="#" data-action="add-urls">
+					<span>Add...</span>
+				</a>
+				<a href="#" data-action="manage-urls">
+					<span>Manager...</span>
+				</a>
+			</div>
+		</div>
+		<div class="menu-item hidden-proj">
+			<a href="#">Compiler</a>
+			<div class="menu-subitems">
+				<a href="#" data-action="change-compiler">
+					<span>Set Compiler...</span>
+				</a>
+				<a href="#" data-action="compile">
+					<span>Compile &amp; Run</span>
+					<span class="shortcut">Ctrl+Shift+B</span>
+				</a>
+				<a href="#" data-action="compile-build">
+					<span>Compile &amp; Build</span>
+				</a>
+			</div>
+		</div>
+		<div class="menu-item menu-right">
+			<div id="stats"></div>
+		</div>
+	</div>
+	<div id="tabs-names">
+
+	</div>
+	<div id="tabs">
+
+	</div>
+	</div>
+	<div id="editor-wrapper" style="width:100%;height:100%;display:none"></div>
+	<script src="js/app.bundle.js"></script>
+	<script src="js/tsservices.js"></script>
+	<script src="js/default_type_schemes.js"></script>
+	<script src="monaco-editor/min/vs/loader.js"></script>
+	<script>vs.init();</script>
+</body>
